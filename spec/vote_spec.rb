@@ -12,7 +12,7 @@ describe Vote do
     @congress = Congress.new(111, :senate)
   end
   
-  describe "getting through a specific Congress, by session and roll call number"do
+  describe "finding through a Congress by session and roll call number"do
     before do
       FakeWeb.clean_registry
       FakeWeb.register_uri(api_url_for('111/senate/sessions/1/votes/12.json'), :string => example_data)
@@ -34,6 +34,7 @@ describe Vote do
     it "returns a Date object for the day of the vote" do
       vote.date.should == Date.parse("2009-01-22")
     end
-    
   end
+  
+  describe ""
 end

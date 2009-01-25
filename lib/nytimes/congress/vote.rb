@@ -6,7 +6,7 @@ module NYTimes
 			ATTRIBUTE_MAP = { 
 			  :date_for     =>  [:date],
         :integer_for  =>  [:session_number, :congress, :roll_call_number],
-        :string_for   =>  [:bill_number, :question, :vote_type, :time, :result],
+        :string_for   =>  [:bill_number, :question, :vote_type, :time, :result, :description],
         :symbol_for   =>  [:chamber]
       }
                 			  

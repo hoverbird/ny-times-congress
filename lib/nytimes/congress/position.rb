@@ -4,6 +4,8 @@ module NYTimes
 		  attr_reader :member_id, :vote_position
 		  alias position vote_position
 		  
+		  VALUES = ['Yes', 'No', 'Not Voting', 'Present', 'Speaker']
+		  
 		  def initialize(member_id, vote_position)
 		    @member_id = member_id
 		    @vote_position = vote_position
@@ -18,10 +20,11 @@ module NYTimes
 		  end
 		  
 		  def for?
-		    case position
-  	      when "Yes" then true
-  	      when "No" then false
-	      end
+        position == 'Yes'
+		  end
+		  
+		  def against?
+		    position == 'No'
 		  end
 		  
 		end
