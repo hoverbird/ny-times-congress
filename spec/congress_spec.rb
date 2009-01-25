@@ -33,7 +33,6 @@ describe Congress do
     end
 
     before do
-    	FakeWeb.clean_registry
     	FakeWeb.register_uri(api_url_for('111/senate/members.json'), :string => example_data)
       @members = congress.members
     end

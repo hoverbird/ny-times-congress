@@ -8,9 +8,7 @@ module NYTimes
         attributes_map.each_pair do |transformation, attributes|
    		    attributes.each do |attribute_name|
    		      value = args[attribute_name.to_s]
-  		      if value
-			        new_values[attribute_name] = do_transformation(transformation, value)
-  			    end
+			      new_values[attribute_name] = do_transformation(transformation, value)
           end
   			end
   			new_values
@@ -36,14 +34,21 @@ module NYTimes
         end
       end
       
+      def symbol_for(string)
+        string.to_sym
+      end
+      
       def roles_for(roles_array)
         roles_array.collect {|role_hash| Role.new(role_hash)}
+      end
+      
+      def positions_for(positions_array)
       end
       
       def empty?(value)
         return true if value.nil? || value == "" || value == 'N/A'
       end
-      
+            
     end
   end
 end

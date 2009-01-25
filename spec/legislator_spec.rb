@@ -1,9 +1,8 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe NYTimes::Congress::Legislator do
+describe Legislator do
   attr_reader :legislator, :role
   
-
 	describe "initializing" do
 	  before do		  
   	  @legislator = Legislator.new(JSON.parse example_data)
@@ -66,7 +65,6 @@ describe NYTimes::Congress::Legislator do
        end
 
       it "assigns attributes as expected" do  
-        # legislator.id.should eql "B000444"    
         legislator.member_id.should eql "B000444"
         legislator.name.should eql "Joseph Biden"
         legislator.gender.should eql "M"
@@ -91,7 +89,6 @@ describe NYTimes::Congress::Legislator do
     end
 	  
 	  before do
-    	FakeWeb.clean_registry
     	FakeWeb.register_uri(api_url_for('members/B000444.json'), :string => example_data)
       @joe = Legislator.find('B000444')
     end

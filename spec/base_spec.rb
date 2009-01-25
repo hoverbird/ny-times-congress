@@ -4,7 +4,7 @@ describe Base do
 	describe "#build_request_url" do
     attr_reader :url, :expected_url
 	
-		setup do
+		before do
 		  @url = NYTimes::Congress::Base.build_request_url("members/A000014.json", {"api-key" => "does-not-matter"} )
 		  @expected_url = URI.parse "http://api.nytimes.com/svc/politics/v2/us/legislative/congress/members/A000014.json?api-key=does-not-matter"
 		end

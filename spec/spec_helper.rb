@@ -1,9 +1,9 @@
+require File.dirname(__FILE__) + '/../lib/nytimes-congress'
 require "rubygems"
 require "spec"
 require 'fake_web'
 gem 'rr'
 
-require File.dirname(__FILE__) + '/../lib/nytimes/congress'
 include NYTimes::Congress
 
 API_KEY = 'blahblah'

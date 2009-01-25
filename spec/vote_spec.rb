@@ -4,28 +4,36 @@ describe Vote do
   attr_reader :congress, :vote
   
   def example_data
-    File.read('example_data/member.json')
+    File.read('example_data/votes.json')
   end
   
   before do
-    @congress = 
-    @vote = Vote.new(111, :senate)
+    FakeWeb.clean_registry
+    @congress = Congress.new(111, :senate)
   end
   
-  describe "initializing with a congress number and chamber symbol", :shared => true do
-    it "is numbered with an Integer" do
-      congress.number.should be_kind_of Integer
-    end
-    
-    it "has a symbol representing the chamber" do
-      congress.chamber.should be_kind_of Symbol
-    end
-  end
-  
-  describe "alternately initializing with Strings for either argument" do
+  describe "getting through a specific Congress, by session and roll call number"do
     before do
-      @congress = Congress.new('111', 'senate')
+      FakeWeb.clean_registry
+      FakeWeb.register_uri(api_url_for('111/senate/sessions/1/votes/12.json'), :string => example_data)
+      @vote = congress.vote(1, 12)    	
     end
     
-    it_should_behave_like "initializing with a congress number and chamber symbol"
+    it "returns its outcome" do
+      vote.result.should == "Agreed to"
+    end
+    it "returns its Congress number and chamber" do
+      vote.congress.should == congress.number
+      vote.chamber.should == congress.chamber      
+    end
+    
+    it "can return its Congress object" do
+      vote.get_congress.should == congress
+    end
+
+    it "returns a Date object for the day of the vote" do
+      vote.date.should == Date.parse("2009-01-22")
+    end
+    
   end
+end
