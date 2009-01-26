@@ -39,14 +39,15 @@ module NYTimes
       end
       
       def roles_for(roles_array)
-        roles_array.collect {|role_hash| Role.new(role_hash)}
+        roles_array.collect {|e| Role.new e}
       end
       
       def positions_for(positions_array)
+        positions_array.collect {|e| Position.new e['member_id'], e['vote_position']}
       end
       
       def empty?(value)
-        return true if value.nil? || value == "" || value == 'N/A'
+        value.nil? || value == "N/A" || value == ""
       end
             
     end

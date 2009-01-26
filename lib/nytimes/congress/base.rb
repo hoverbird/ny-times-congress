@@ -11,13 +11,11 @@ module NYTimes
 			
 			class << self
 				
-				##
 				# The copyright footer to be placed at the bottom of any data from the New York Times. Note this is only set after an API call.
 				def copyright
 					@@copyright
 				end
 				
-				##
 				# Set the API key used for operations. This needs to be called before any requests against the API. To obtain an API key, go to http://developer.nytimes.com/
 				def api_key=(key)
 					@@api_key = key
@@ -27,7 +25,6 @@ module NYTimes
 					@@api_key
 				end
 				
-				##
 				# Builds a request URI to call the API server
 				def build_request_url(path, params)
 					URI::HTTP.build :host => API_SERVER,
@@ -42,10 +39,9 @@ module NYTimes
 						end
 						
 						full_params = params.merge 'api-key' => @@api_key
-						
 						uri = build_request_url(path, full_params)
 												
-						reply = uri.read						
+						reply = uri.read
 						reply = JSON.parse(reply)
 												
 						raise "Empty reply returned from API" if reply.nil?

@@ -7,6 +7,7 @@ module NYTimes
 		  VALUES = ['Yes', 'No', 'Not Voting', 'Present', 'Speaker']
 		  
 		  def initialize(member_id, vote_position)
+		    raise "Member ID required" unless member_id
 		    @member_id = member_id
 		    @vote_position = vote_position
 		  end
@@ -25,6 +26,10 @@ module NYTimes
 		  
 		  def against?
 		    position == 'No'
+		  end
+		  
+		  def not_voting?
+		    position == 'Not Voting'
 		  end
 		  
 		end

@@ -5,27 +5,35 @@ module NYTimes
 		  include AttributeTransformation
       
       def initialize(number, chamber)
-        @number  = number.to_i
-        @chamber = chamber.to_sym
+        @number  = integer_for number
+        @chamber = symbol_for chamber
+        raise AttributeError unless number && chamber
       end
       
       def members(params = {})
-        results = Base.invoke("#{path}/members.json")['results'].first
-  			results['members'].collect { |hash| Legislator.new(hash) }
+        @members ||= fetch_members
       end
       
-      def vote(session_number, roll_call_number, params = {})
-        results = Base.invoke("#{path}/sessions/#{session_number}/votes/#{roll_call_number}.json")['results']['votes']['vote']
-        results.merge!({:chamber => chamber}) # TODO 'chamber' is missing from Vote JSON results for some reason
-        Vote.new results
+      def roll_call_vote(session_number, roll_call_number, params = {})
+        results = Base.invoke("#{api_path}/sessions/#{session_number}/votes/#{roll_call_number}.json")['results']['votes']['vote']
+        results.merge!({'chamber' => chamber}) # TODO 'chamber' is missing from RollCallVote JSON results for some reason
+        RollCallVote.new(results)
       end
       
       protected
       
-      def path
+      def fetch_members
+        results = Base.invoke("#{api_path}/members.json")['results'].first
+  			results['members'].inject({}) do |hash, member| 
+  			  hash[member['id']] = Legislator.new(member)
+  			  hash
+  			end
+      end
+      
+      def api_path
         "#{number}/#{chamber}"
       end      
-    end
     
+    end
   end
 end

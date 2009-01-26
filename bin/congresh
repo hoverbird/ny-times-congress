@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+congress_lib  = File.dirname(__FILE__) + '/../lib/nytimes-congress'
+setup    = File.dirname(__FILE__) + '/setup'
+irb_name = RUBY_PLATFORM =~ /mswin32/ ? 'irb.bat' : 'irb'
+
+exec "#{irb_name} -r #{congress_lib} -r #{setup} --simple-prompt"

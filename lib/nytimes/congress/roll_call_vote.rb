@@ -1,15 +1,15 @@
 module NYTimes
 	module Congress
-		class Vote < Base
+		class RollCallVote < Base
       include AttributeTransformation
 
 			ATTRIBUTE_MAP = { 
-			  :date_for     =>  [:date],
-        :integer_for  =>  [:session_number, :congress, :roll_call_number],
-        :string_for   =>  [:bill_number, :question, :vote_type, :time, :result, :description],
-        :symbol_for   =>  [:chamber]
-      }
-                			  
+			  :date_for       =>  [:date],
+        :integer_for    =>  [:session_number, :congress, :roll_call_number],
+        :string_for     =>  [:bill_number, :question, :vote_type, :time, :result, :description],
+        :symbol_for     =>  [:chamber],
+        :positions_for  =>  [:positions]
+      }              			  
       attr_reader *ATTRIBUTE_MAP.values.flatten
 
 			def initialize(args={})

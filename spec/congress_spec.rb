@@ -37,9 +37,10 @@ describe Congress do
       @members = congress.members
     end
 
-    it "should return an array of Legislators" do
-      members.should be_kind_of Array
-      members.all?{|e| e.class.should == Legislator}
+    it "should return an hash of Legislators keyed by ID" do
+      members.should be_kind_of Hash
+      members.values.all? {|e| e.class.should == Legislator}
+      members['R000409'].name.should == "Dana Rohrabacher"
     end
 
     it "should return all members" do
