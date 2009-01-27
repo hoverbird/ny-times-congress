@@ -1,0 +1,26 @@
+NY Times Congress
+===============
+
+A Ruby wrapper for the New York Times congress API.
+---------------------
+The aim of this gem is to provide a simple interface for inquiry into the United States Congress.  The NY Times gathers information on our legislator's party affiliations, congressional roles, voting positions and biographical data. By packaging these diverse API calls into an object graph, I hope to make it easier to turn this raw information into real insight on our elected representatives.
+
+
+Acknowledgements
+---------------------
+All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris.
+
+
+Terms of Use
+---------------------
+All information made available through this software is generously organized and hosted by the New York Times and is subject to copyright.  By obtaining an API key throught their Developer program and accessing this data you are agreeing to abide by certain rules and restrictions. These are available at the URLs below and you should read them before proceeding:
+
+  http://developer.nytimes.com/attribution
+  http://developer.nytimes.com/Api_terms_of_use
+
+
+License
+---------------------
+Copyright (c) 2009 Patrick Ewing. <patrick.henry.ewing@gmail.com>
+Made available under the MIT License (read COPYING file for details).
+
