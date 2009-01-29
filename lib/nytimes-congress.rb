@@ -2,7 +2,6 @@ $LOAD_PATH.push(File.join(File.dirname(__FILE__), "../lib/nytimes"))
 
 require 'rubygems'
 require 'open-uri'
-require 'ostruct'
 require 'JSON'
 
 require 'congress/base'
