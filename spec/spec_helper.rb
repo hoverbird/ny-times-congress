@@ -2,6 +2,8 @@ require File.dirname(__FILE__) + '/../lib/nytimes-congress'
 require "rubygems"
 require "spec"
 require 'fake_web'
+require 'example_data/example_data'
+
 gem 'rr'
 
 include NYTimes::Congress

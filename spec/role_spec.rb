@@ -4,18 +4,7 @@ describe NYTimes::Congress::Role do
   attr_reader :role
   
   def example_data
-    <<-JSON
-      {
-         "congress":"111",
-         "chamber":"Senate",
-         "title":"Senator, 2nd Class",
-         "state":"DE",
-         "party":"D",
-         "district":"N/A",
-         "start_date":"2009-01-06",
-         "end_date":"2009-01-20"
-      }
-	  JSON
+    role_response_fragment
 	end
 	
 	context "initializing with params hash", :shared => true do

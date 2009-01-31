@@ -6,6 +6,21 @@ A Ruby wrapper for the New York Times congress API.
 The aim of this gem is to provide a simple interface for inquiry into the United States Congress.  The NY Times gathers information on our legislator's party affiliations, congressional roles, voting positions and biographical data. By packaging these diverse API calls into an object graph, I hope to make it easier to turn this raw information into real insight on our elected representatives.
 
 
+Congress.new
+  senators = Congress.new(111, 'senate').members
+  
+Roll Call Votes
+  house = Congress.new(111, 'house')
+  votes = house.roll_call_vote(1, 14)
+
+Legislator
+
+  
+  hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
+  hillary = senators['C001041']
+  
+  Legislator.find('C001041')
+
 Acknowledgements
 ---------------------
 All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris.

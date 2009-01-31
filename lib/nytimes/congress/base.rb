@@ -4,7 +4,7 @@ module NYTimes
 		  API_NAME              = 'congress'
 		  API_SERVER            = 'api.nytimes.com'
 		  API_VERSION           = 2
-			API_BASE              = "/svc/politics/v#{API_VERSION}/us/legislative/#{API_NAME}"			
+		  API_BASE              = "/svc/politics/v#{API_VERSION}/us/legislative/#{API_NAME}"
 			
 			@@api_key = nil
 			@@copyright = nil
@@ -54,8 +54,19 @@ module NYTimes
 						raise "Error connecting to URL #{uri} #{e}"
 					end
 				end
-				
+        
+        def define_lazy_reader_for_attribute_named(attribute)
+          class_eval(<<-EVAL, __FILE__, __LINE__)
+            def #{attribute}
+              load_fully if attributes[:#{attribute}].nil? && !fully_loaded
+              attributes[:#{attribute}]
+            end
+          EVAL
+        end
 			end
+			
+
+      
 		end
 	end
 end
