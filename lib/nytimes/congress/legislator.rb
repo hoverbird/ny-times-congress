@@ -1,43 +1,56 @@
 module NYTimes
 	module Congress
 		class Legislator < Base
-		  
       include AttributeTransformation
 			ATTRIBUTE_MAP = { :date_for    =>  [:date_of_birth],
                         :roles_for   =>  [:roles],
                 			  :integer_for =>  [:govtrack_id, :district],
-                			  :string_for  =>  [:id, :url, :state, :gender, :name, :party] }
-      
-      attr_reader *ATTRIBUTE_MAP.values.flatten
-      alias member_id id
+                			  :string_for  =>  [:url, :state, :gender, :name, :party] }
+                			  
+      ATTRIBUTES = ATTRIBUTE_MAP.values.flatten
+      ATTRIBUTES.each {|attribute| define_lazy_reader_for_attribute_named attribute }
       
       def self.find(id)
-        response = invoke("members/#{id}.json")['results'].first
-				new(response)
+        response = invoke("members/#{id}.json")['results']        
+				new(response.first)
       end
-		
+		  attr_reader :attributes, :id
+		  
 			def initialize(args={})
-  			transformed_values = self.transform(args, ATTRIBUTE_MAP)
-				transformed_values.each_pair do |attribute, value|
-					instance_variable_set("@#{attribute}", value)
+        @attributes = {}
+  			@id = args.delete('id') || args.delete('member_id')
+  			transformed = transform(args, ATTRIBUTE_MAP)
+				transformed.each_pair do |attribute_name, attribute_value|
+				  attributes[attribute_name.to_sym] = attribute_value
 				end
-				set_id(args['member_id'])
+				@fully_loaded = false
 			end
       
       def positions
         response = Base.invoke("members/#{id}/votes.json")
-        response['results'].first.collect do |hash|
-          Position.new(hash)
-        end
+        response = response['results'].first['votes']
+        positions_for(response)
       end
-			
+      
+      def votes
+        response = Base.invoke("members/#{id}/votes.json")
+        response = response['results'].first['votes']
+        votes_for(response)
+      end
+  		
 			private
-			
-			# normalize identifier, which is referred to as member_id in some contexts
-			def set_id(new_id)
-        @id = new_id if empty?(id)  			  
-			end
-			
+			  attr_reader :fully_loaded
+			  
+			  def fully_loaded?
+			    fully_loaded
+			  end
+			  
+	  		def load_fully
+	  		  full_legislator = self.class.find(id)
+	  		  attributes.merge!(full_legislator.attributes)
+	  		  @fully_loaded = true
+  			end
+
     end
   end
 end

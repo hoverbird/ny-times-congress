@@ -15,22 +15,12 @@ The Congress Shell (congresh for short/cute) is a simple interactive prompt for 
   >> my_house_of_reps = House
   => #<NYTimes::Congress::Congress:0x12c3cc8 @chamber=:house, @number=111>
 
-  
 Or access any other Congress by number and chamber like so:
 
   >> 2008_senate = Congress.new(110, :senate)
   >> 2007_house = Congress.new(109, :house)
   
-Through a congress, you can get a list of its representatives as a hash, keyed by congressional bio ID
-
-  senators   = Senate.members
-  reps_of_07 = 2007_house.members
-  
-From there you could search to find their bio_id
-
-  senators.find
-  
-  Legislator.find 'C000286'
+Through a Congress object, you can get a list of its representatives as a hash, keyed by 
 
 The aim of this gem is to provide a simple interface for inquiry into the United States Congress.  The NY Times gathers information on our legislator's party affiliations, congressional roles, voting positions and biographical data. By packaging these diverse API calls into an object graph, I hope to make it easier to turn this raw information into real insight on our elected representatives.
 
@@ -43,7 +33,6 @@ Roll Call Votes
   votes = house.roll_call_vote(1, 14)
 
 Legislator
-
   
   hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
   hillary = senators['C001041']
