@@ -7,41 +7,43 @@ The NY Times has graciously been scraping the web for data related to the United
 
 Introdushing Congresh
 ---------------------
-The Congress Shell (congresh for short/cute) is a simple interactive prompt for interacting with the API.  It provides a few conveniences to make it easy to get at a current Congress:
-
-  >> this_years_senate = Senate
-  => #<NYTimes::Congress::Congress:0x12c3d68 @chamber=:senate, @number=111>
-  
-  >> my_house_of_reps = House
-  => #<NYTimes::Congress::Congress:0x12c3cc8 @chamber=:house, @number=111>
-
-Or access any other Congress by number and chamber like so:
-
-  >> 2008_senate = Congress.new(110, :senate)
-  >> 2007_house = Congress.new(109, :house)
-  
-Through a Congress object, you can get a list of its representatives as a hash, keyed by 
-
-The aim of this gem is to provide a simple interface for inquiry into the United States Congress.  The NY Times gathers information on our legislator's party affiliations, congressional roles, voting positions and biographical data. By packaging these diverse API calls into an object graph, I hope to make it easier to turn this raw information into real insight on our elected representatives.
+The Congress Shell (congresh for short/cute) is a simple interactive prompt for interacting with the API.  It provides a few conveniences to make it easy to get at the current chambers of congress.
 
 
 Congress.new
-  senators = Congress.new(111, 'senate').members
+---------------------
+You get a Congress object either by calling Congress.new with the session and chamber, or by using the Senate and House constants which return the current session of each:
+
+    current_senate = Senate
+    current_house  = House
+    2007_senate    = Congressnew(109, 'senate')
+    2008_house     = Congress.new(110, 'house')
+
+Through a Congress object, you can get a list of its representatives as a hash, keyed by congressional Bio ID.
+
+    senators = Congress.new(111, 'senate').members
   
 Roll Call Votes
-  house = Congress.new(111, 'house')
-  votes = house.roll_call_vote(1, 14)
+---------------------
+
+To be continued...
 
 Legislator
+---------------------
   
-  hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
-  hillary = senators['C001041']
+    hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
   
-  Legislator.find('C001041')
+  or
+  
+    hillary = senators['C001041']
+  
+For full details on Bios and roles, use:
+  
+    Legislator.find('C001041')
 
 Acknowledgements
 ---------------------
-All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris.
+All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris and the sunlight gem by Luigi Montanez.
 
 
 Terms of Use
@@ -54,6 +56,8 @@ All information made available through this software is generously organized and
 
 License
 ---------------------
-Copyright (c) 2009 Patrick Ewing. <patrick.henry.ewing@gmail.com>
-Made available under the MIT License (read COPYING file for details).
+Copyright (c) 2009 Patrick Ewing <patrick.henry.ewing@gmail.com>
+
+
+Made available under the MIT License (read LICENSE for details).
 
