@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-congress_lib  = File.dirname(__FILE__) + '/../lib/nytimes-congress'
+congress_lib  = File.dirname(__FILE__) + '/../lib/ny-times-congress'
 setup    = File.dirname(__FILE__) + '/setup'
 irb_name = RUBY_PLATFORM =~ /mswin32/ ? 'irb.bat' : 'irb'
 

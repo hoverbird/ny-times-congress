@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/nytimes-congress'
+require File.dirname(__FILE__) + '/../lib/ny-times-congress'
 require "rubygems"
 require "spec"
 require 'fake_web'

@@ -20,6 +20,10 @@ module NYTimes
         RollCallVote.new(results)
       end
       
+      def to_s
+        "#{number} #{chamber.upcase}"
+      end
+      
       protected
       
       def fetch_members
