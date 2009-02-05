@@ -22,24 +22,31 @@ You get a Congress object either by calling Congress.new with the session and ch
 Through a Congress object, you can get a list of its representatives as a hash, keyed by congressional Bio ID.
 
     senators = Congress.new(111, 'senate').members
-  
-Roll Call Votes
----------------------
-
-To be continued...
 
 Legislator
 ---------------------
-  
+
     hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
-  
+
   or
-  
+
     hillary = senators['C001041']
-  
+
 For full details on Bios and roles, use:
-  
+
     Legislator.find('C001041')
+    
+    
+Roll Call Votes
+---------------------
+
+To find a vote in any congress, you need to know the session (usually 1 or 2, although rarely congress will go into a 3rd session) and then the ID of the vote:
+
+    Senate.roll_call_vote(session_number, vote_number)
+    
+You can also find recent votes for any given senator:
+    hillary = Legislator.find('C001041')
+    hillary.votes
 
 Acknowledgements
 ---------------------
