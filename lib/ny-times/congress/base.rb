@@ -64,9 +64,7 @@ module NYTimes
           EVAL
         end
 			end
-			
-
-      
 		end
+		
 	end
 end
