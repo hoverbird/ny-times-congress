@@ -50,7 +50,7 @@ You can also find recent votes for any given senator:
 
 Acknowledgements
 ---------------------
-All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris and the sunlight gem by Luigi Montanez.
+All information made available through this software is generously gathered and hosted by the New York Times (read Terms of Use below).  Inspiration and code was borrowed from the excellent nytimes-movies gem written by Jacob Harris and the sunlight gem by Luigi Montanez.  Thanks to Marcel Molina, Jr. for pairing with me on the lazy-loading idea.
 
 
 Terms of Use
