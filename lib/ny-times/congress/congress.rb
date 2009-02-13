@@ -5,8 +5,8 @@ module NYTimes
 		  include AttributeTransformation
       
       def initialize(number, chamber)
-        @number  = integer_for number
-        @chamber = symbol_for chamber
+        @number = integer_for(number)
+        @chamber = symbol_for(chamber)
         raise AttributeError unless number && chamber
       end
       
@@ -36,8 +36,8 @@ module NYTimes
       
       def api_path
         "#{number}/#{chamber}"
-      end      
-    
+      end        
     end
+    
   end
 end

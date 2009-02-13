@@ -1,5 +1,13 @@
 def member_response
-  File.read('example_data/member.json')
+  File.read(File.dirname(__FILE__) + '/member.json')
+end
+
+def members_response
+  File.read(File.dirname(__FILE__) + '/members.json')
+end
+
+def roll_call_votes_response
+  File.read(File.dirname(__FILE__) + '/roll_call_votes.json')
 end
 
 def limited_legislator_attributes

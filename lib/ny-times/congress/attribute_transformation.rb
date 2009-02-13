@@ -39,17 +39,16 @@ module NYTimes
       end
       
       def roles_for(roles_array)
-        roles_array.collect {|e| Role.new e}
+        roles_array.collect {|e| Role.new(e)}
       end
       
       def votes_for(votes_array)        
-        votes_array.collect {|vote_hash| RollCallVote.new vote_hash['vote'] }
+        votes_array.collect {|vote_hash| RollCallVote.new(vote_hash['vote'])}
       end
       
       def positions_for(votes_array)        
         votes_array.collect do |vote_hash|
-          vote = vote_hash['vote']
-          Position.new vote['member_id'], vote['vote_position'], vote
+          Position.new(vote_hash['member_id'], vote_hash['vote_position'])
         end
       end
       

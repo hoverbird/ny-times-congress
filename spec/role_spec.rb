@@ -9,7 +9,7 @@ describe NYTimes::Congress::Role do
 	
 	context "initializing with params hash", :shared => true do
 		before do
-		  @role = Role.new(JSON.parse example_data)
+		  @role = Role.new(JSON.parse(example_data))
 		end
 		
 		it "should set String attributes" do 
@@ -71,7 +71,7 @@ describe NYTimes::Congress::Role do
      end
     
     before do     
-      @legislator = Legislator.new(JSON.parse example_data)
+      @legislator = Legislator.new(JSON.parse(example_data))
       legislator.roles.should_not be_nil
       @role = legislator.roles.sort_by{|r| r.congress}.first
     end
@@ -97,7 +97,7 @@ describe NYTimes::Congress::Role do
     end
     
     it "can be found through the Legislator" do
-      legislator.roles.should include role
+      legislator.roles.should include(role)
     end    
 		
   end

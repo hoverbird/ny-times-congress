@@ -9,11 +9,11 @@ describe Congress do
   
   describe "initializing with a congress number and chamber symbol", :shared => true do
     it "is numbered with an Integer" do
-      congress.number.should be_kind_of Integer
+      congress.number.should be_kind_of(Integer)
     end
     
     it "has a symbol representing the chamber" do
-      congress.chamber.should be_kind_of Symbol
+      congress.chamber.should be_kind_of(Symbol)
     end
   end
   
@@ -29,7 +29,7 @@ describe Congress do
     attr_accessor :members
   
     def example_data
-      File.read('example_data/members.json')
+      members_response
     end
 
     before do
@@ -38,7 +38,7 @@ describe Congress do
     end
 
     it "should return an hash of Legislators keyed by ID" do
-      members.should be_kind_of Hash
+      members.should be_kind_of(Hash)
       members.values.all? {|e| e.class.should == Legislator}
       members['R000409'].name.should == "Dana Rohrabacher"
     end

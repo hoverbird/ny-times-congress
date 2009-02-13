@@ -1,8 +1,9 @@
 require File.dirname(__FILE__) + '/../lib/ny-times-congress'
+require File.dirname(__FILE__) + '/example_data/example_data'
+
 require "rubygems"
 require "spec"
 require 'fake_web'
-require 'example_data/example_data'
 
 gem 'rr'
 

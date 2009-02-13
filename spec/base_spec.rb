@@ -10,7 +10,7 @@ describe Base do
 		end
 		
 		it "returns a string matching the expected URL" do
-		  url.should eql expected_url
+		  url.should eql(expected_url)
 		end
 		
 	end

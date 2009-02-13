@@ -6,11 +6,10 @@ module NYTimes
 		  
 		  VALUES = ['Yes', 'No', 'Not Voting', 'Present', 'Speaker']
 		  
-		  def initialize(member_id, vote_position, vote)
-		    raise "Member ID required" unless member_id
+		  def initialize(member_id, vote_position, vote = nil)
 		    @member_id = member_id
 		    @vote_position = vote_position
-		    @vote = RollCallVote.new(extra_attrs)
+        @vote = vote
 		  end
 		  
 		  def legislator
@@ -36,5 +35,3 @@ module NYTimes
 		end
 	end
 end
-
-# {"votes"=>[{"vote"=>{"chamber"=>"Senate", "time"=>"11:57:00", "date"=>"2008-06-10", "roll_call"=>"147", "session"=>"2", "member_id"=>"B001210", "congress"=>"110", "position"=>"Not Voting"}}], "total_votes"=>"100", "member_id"=>"B001210", "offset"=>"0"}

@@ -4,7 +4,7 @@ describe RollCallVote do
   attr_reader :congress, :vote
   
   def example_data
-    File.read('example_data/roll_call_votes.json')
+    roll_call_votes_response
   end
   
   before do

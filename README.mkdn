@@ -3,12 +3,11 @@ NY Times Congress
 
 A Ruby wrapper for the New York Times Congress API.
 ---------------------
-The NY Times has graciously been scraping the web for data related to the United States Congress!  This is a Ruby library and command-shell intended to make it even easier to get at that data and turn it into useful information.
+The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public "API":http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/. "ny-times-congress":http://github.com/hoverbird/ny-times-congress/tree/master aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly..
 
 Introdushing Congresh
 ---------------------
-The Congress Shell (congresh for short/cute) is a simple interactive prompt for interacting with the API.  It provides a few conveniences to make it easy to get at the current chambers of congress.
-
+The Congress Shell (congresh for short/cute) is a simple interactive prompt that wraps IRB.  It includes your API key (see setup below) and provides a few conveniences to make test-
 
 Congress.new
 ---------------------

@@ -20,7 +20,7 @@ describe Legislator do
     end
     
     it "should return the Legislator's roles" do
-      joe.roles.size.should be 11
+      joe.roles.size.should == 11
       joe.roles.first.title.should == "Senator, 1st Class"
       joe.roles.first.state.should == "CT"
     end
@@ -38,10 +38,10 @@ describe Legislator do
   		end
 		
   		it "assigns attributes as expected" do
-  		  legislator.id.should eql "B000444"
-        legislator.name.should eql "Joseph Biden"
-        legislator.party.should eql "D"
-        legislator.state.should eql "DE"
+  		  legislator.id.should == "B000444"
+        legislator.name.should == "Joseph Biden"
+        legislator.party.should == "D"
+        legislator.state.should == "DE"
   		end
   		
   		describe ":id and :member_id attributes" do
@@ -69,24 +69,24 @@ describe Legislator do
       end
 
       it "assigns attributes as expected" do  
-        legislator.id.should eql "B000444"
-        legislator.name.should eql "Joseph Biden"
-        legislator.gender.should eql "M"
-        legislator.govtrack_id.should eql 300008
-        legislator.url.should eql "http://biden.senate.gov"
-        legislator.date_of_birth.should eql Date.parse("1942-11-20")
+        legislator.id.should == "B000444"
+        legislator.name.should == "Joseph Biden"
+        legislator.gender.should == "M"
+        legislator.govtrack_id.should == 300008
+        legislator.url.should == "http://biden.senate.gov"
+        legislator.date_of_birth.should == Date.parse("1942-11-20")
         legislator.district.should be_nil
       end
     
       it "assigns a number of Roles to the Legislator" do
         legislator.roles.size.should == 2
-        legislator.roles.each {|role| role.should be_kind_of Role}      
+        legislator.roles.each {|role| role.should be_kind_of(Role)}      
       end
   	end
   end
 	
   describe "#positions" do
-    
+    it "needs specs"
   end
   
   describe "#roles" do
@@ -114,7 +114,7 @@ describe Legislator do
         legislator.roles
         roles = legislator.instance_variable_get("@roles").should_not be_nil
   		  
-  		  legislator.url.should eql Date.parse("1942-11-20")
+  		  legislator.url.should == Date.parse("1942-11-20")
         legislator.date_of_birth.should == Date.parse("http://biden.senate.gov")
       end
       
