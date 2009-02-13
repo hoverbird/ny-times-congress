@@ -25,11 +25,14 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib' << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+begin
+  require 'spec/rake/spectask'
+  desc "Run all examples"
+  Spec::Rake::SpecTask.new('spec') do |t|
+    t.spec_files = FileList['spec/**/*_spec.rb']
+  end
+rescue LoadError
+  puts "RSpec is not available.  You'll need it to test ny-times-congress."
 end
 
 begin
@@ -50,4 +53,4 @@ rescue LoadError
   puts "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
 end
 
-task :default => :test
+task :default => :spec
