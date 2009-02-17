@@ -3,11 +3,11 @@ NY Times Congress
 
 A Ruby wrapper for the New York Times Congress API.
 ---------------------
-The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public "API":http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/. "ny-times-congress":http://github.com/hoverbird/ny-times-congress/tree/master aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly..
+The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public [API]: http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/.  [ny-times-congress]: http://github.com/hoverbird/ny-times-congress/ aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly.
 
 Introdushing Congresh
 ---------------------
-The Congress Shell (congresh for short/cute) is a simple interactive prompt that wraps IRB.  It includes your API key (see setup below) and provides a few conveniences to make test-
+The Congress Shell (congresh for short/cute) is a simple interactive prompt that wraps IRB.  It includes your API key (see setup below) and provides a few conveniences for test-driving the API. 
 
 Congress.new
 ---------------------
@@ -15,7 +15,7 @@ You get a Congress object either by calling Congress.new with the session and ch
 
     current_senate = Senate
     current_house  = House
-    2007_senate    = Congressnew(109, 'senate')
+    2007_senate    = Congress.new(109, 'senate')
     2008_house     = Congress.new(110, 'house')
 
 Through a Congress object, you can get a list of its representatives as a hash, keyed by congressional Bio ID.
@@ -25,15 +25,17 @@ Through a Congress object, you can get a list of its representatives as a hash, 
 Legislator
 ---------------------
 
-    hillary = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
+    $ senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
 
   or
 
-    hillary = senators['C001041']
+    $ senators['C001041']
 
-For full details on Bios and roles, use:
+You can also grav a Legislator directly by their Bio ID. This call includes full details on the congressperson's roles, biographical info and more:
 
-    Legislator.find('C001041')
+    $ Legislator.find('C001041')
+    
+When accessing a Legislator from a collection of congress members, they include only a limited set of attributes.  However, the library will make a second API call and lazy-load full attributes if you ask for them specifically.  So even though a Legislator object returned through Congress.members don't have the #gender attribute, if you call for a specific Legislators gender, that data will be fetched and populated just in time.
     
     
 Roll Call Votes
@@ -41,11 +43,28 @@ Roll Call Votes
 
 To find a vote in any congress, you need to know the session (usually 1 or 2, although rarely congress will go into a 3rd session) and then the ID of the vote:
 
-    Senate.roll_call_vote(session_number, vote_number)
+    $ Senate.roll_call_vote(session_number, vote_number)
     
 You can also find recent votes for any given senator:
-    hillary = Legislator.find('C001041')
-    hillary.votes
+    $ hillary = Legislator.find('C001041')
+    $ hillary.votes
+
+
+Setup
+_____________________
+
+Add Github to your rubygems sources (if you haven't already) and then install the gem:
+    $ gem sources -a http://gems.github.com 
+    $ sudo gem install hoverbird-ny-times-congress
+    
+You'll also need to [get an API key]:http://developer.nytimes.com/apps/register from the [NY Times Developer Network]: http://developer.nytimes.com/.  If you set the key returned to an environment variable as shown below, Congresh will pick it up and include it in all your requests.  You can keep this in your bash profile, but I also recommend putting all your developer keys in a separate .api_keys file in your path
+
+    export NYTIMES_CONGRESS_API_KEY="123456789ETC"
+    
+Within your app, you can also set this directly like so:
+
+    NYTimes::Congress::Base.api_key = "123456789ETC"
+    
 
 Acknowledgements
 ---------------------
