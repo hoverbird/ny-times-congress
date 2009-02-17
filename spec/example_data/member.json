@@ -5,6 +5,9 @@
       {
          "member_id": "L000304",
          "name": "Joseph I. Lieberman",
+         "first_name": "Joseph I.",
+         "middle_name": "I.",
+         "last_name": "Lieberman",
          "date_of_birth": "1942-02-24",
          "gender": "M",
          "url": "http://lieberman.senate.gov/",
@@ -18,7 +21,9 @@
            "party": "ID",
            "district": "N/A",
            "start_date": "2009-01-06",
-           "end_date": "2011-01-04"
+           "end_date": "2011-01-04",
+           "missed_votes_pct": "0.00",
+           "votes_with_party_pct": "93.44"
          },        {
            "congress": "110",
            "chamber": "Senate",
@@ -27,7 +32,9 @@
            "party": "ID",
            "district": "N/A",
            "start_date": "2007-01-04",
-           "end_date": "2009-01-03"
+           "end_date": "2009-01-03",
+           "missed_votes_pct": "3.20",
+           "votes_with_party_pct": "86.79"
          },        {
            "congress": "109",
            "chamber": "Senate",
@@ -36,7 +43,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "2005-01-04",
-           "end_date": "2006-12-09"
+           "end_date": "2006-12-09",
+           "missed_votes_pct": "7.44",
+           "votes_with_party_pct": "88.78"
          },        {
            "congress": "108",
            "chamber": "Senate",
@@ -45,7 +54,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "2003-01-07",
-           "end_date": "2004-12-08"
+           "end_date": "2004-12-08",
+           "missed_votes_pct": "39.11",
+           "votes_with_party_pct": "92.21"
          },        {
            "congress": "107",
            "chamber": "Senate",
@@ -54,7 +65,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "2001-01-03",
-           "end_date": "2002-11-22"
+           "end_date": "2002-11-22",
+           "missed_votes_pct": "1.90",
+           "votes_with_party_pct": "92.11"
          },        {
            "congress": "106",
            "chamber": "Senate",
@@ -63,7 +76,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1999-01-06",
-           "end_date": "2000-12-15"
+           "end_date": "2000-12-15",
+           "missed_votes_pct": "10.12",
+           "votes_with_party_pct": "90.56"
          },        {
            "congress": "105",
            "chamber": "Senate",
@@ -72,7 +87,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1997-01-07",
-           "end_date": "1998-12-19"
+           "end_date": "1998-12-19",
+           "missed_votes_pct": "0.65",
+           "votes_with_party_pct": "85.03"
          },        {
            "congress": "104",
            "chamber": "Senate",
@@ -81,7 +98,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1995-01-04",
-           "end_date": "1996-10-04"
+           "end_date": "1996-10-04",
+           "missed_votes_pct": "1.21",
+           "votes_with_party_pct": "61.50"
          },        {
            "congress": "103",
            "chamber": "Senate",
@@ -90,7 +109,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1993-01-05",
-           "end_date": "1994-12-01"
+           "end_date": "1994-12-01",
+           "missed_votes_pct": "1.38",
+           "votes_with_party_pct": "83.94"
          },        {
            "congress": "102",
            "chamber": "Senate",
@@ -99,7 +120,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1991-01-03",
-           "end_date": "1993-01-03"
+           "end_date": "1993-01-03",
+           "missed_votes_pct": "1.09",
+           "votes_with_party_pct": "84.19"
          },        {
            "congress": "101",
            "chamber": "Senate",
@@ -108,7 +131,9 @@
            "party": "D",
            "district": "N/A",
            "start_date": "1989-01-03",
-           "end_date": "1991-01-03"
+           "end_date": "1991-01-03",
+           "missed_votes_pct": "0.63",
+           "votes_with_party_pct": "84.86"
          }       ]
         } 
     ]
