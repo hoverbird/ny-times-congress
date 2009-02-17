@@ -40,11 +40,11 @@ describe Congress do
     it "should return an hash of Legislators keyed by ID" do
       members.should be_kind_of(Hash)
       members.values.all? {|e| e.class.should == Legislator}
-      members['R000409'].name.should == "Dana Rohrabacher"
+      members['M000303'].name.should == "John McCain"
     end
 
     it "should return all members" do
-      members.size.should == 448
+      members.size.should == 102
     end
     
   end  

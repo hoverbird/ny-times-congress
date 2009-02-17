@@ -1,10 +1,10 @@
 module NYTimes
 	module Congress
 		class Base
-		  API_NAME              = 'congress'
-		  API_SERVER            = 'api.nytimes.com'
-		  API_VERSION           = 2
-		  API_BASE              = "/svc/politics/v#{API_VERSION}/us/legislative/#{API_NAME}"
+		  API_NAME    = 'congress'
+		  API_SERVER  = 'api.nytimes.com'
+		  API_VERSION = 2
+		  API_BASE    = "/svc/politics/v#{API_VERSION}/us/legislative/#{API_NAME}"
 			
 			@@api_key = nil
 			@@copyright = nil
@@ -40,7 +40,7 @@ module NYTimes
 						
 						full_params = params.merge 'api-key' => @@api_key
 						uri = build_request_url(path, full_params)
-												
+
 						reply = uri.read
 						reply = JSON.parse(reply)
 												
@@ -64,7 +64,7 @@ module NYTimes
           EVAL
         end
 			end
+			
 		end
-		
 	end
 end

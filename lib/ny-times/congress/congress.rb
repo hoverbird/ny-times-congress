@@ -10,7 +10,7 @@ module NYTimes
         raise AttributeError unless number && chamber
       end
       
-      def members(params = {})
+      def members(params = {})        
         @members ||= fetch_members
       end
       

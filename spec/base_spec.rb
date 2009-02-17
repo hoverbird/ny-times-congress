@@ -22,8 +22,8 @@ describe Base do
       end
     
 	  it "makes a call to a given url and parses the returned JSON into a response hash" do
-	    FakeWeb.register_uri(api_url_for('congress/111/senate/members.json'), :string => example_data)
-      @response = NYTimes::Congress::Base.invoke("congress/111/senate/members.json")
+	    FakeWeb.register_uri(api_url_for('111/senate/members.json'), :string => example_data)
+      @response = NYTimes::Congress::Base.invoke("111/senate/members.json")
       response.should == JSON.parse(example_data)
 	  end
 	  
