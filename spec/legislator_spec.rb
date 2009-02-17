@@ -20,34 +20,34 @@ describe Legislator do
     end
     
     it "should return the Legislator's roles" do
-      joe.roles.size.should == 11
+      joe.roles.size.should        == 11
       joe.roles.first.title.should == "Senator, 1st Class"
       joe.roles.first.state.should == "CT"
     end
 	end
 	
 	describe "#initialize" do
-	  before do
-	    @parsed_data  = JSON.parse(example_data)
-  	  @legislator   = Legislator.new(parsed_data)
-  	end
-    
 	  context "with limited params hash" do
   	  def example_data
         limited_legislator_attributes
   		end
-		
+  		
+		  before do
+  	    @parsed_data  = JSON.parse(example_data)
+    	  @legislator   = Legislator.new(parsed_data)	    
+    	end
+    	
   		it "assigns attributes as expected" do
-  		  legislator.id.should == "B000444"
-        legislator.name.should == "Joseph Biden"
-        legislator.party.should == "D"
-        legislator.state.should == "DE"
+  		  legislator.id.should == "L000304"
+        legislator.name.should == "Joseph I. Lieberman"
+        legislator.party.should == "ID"
+        legislator.state.should == "CT"
   		end
   		
   		describe ":id and :member_id attributes" do
   		  attr_reader :identifier
   		  
-  		  setup do
+  		  before do
   		    @identifier = "H00HAA"
   		  end
   		  
@@ -63,19 +63,24 @@ describe Legislator do
     	end
 	  end
 		
-    describe "initializing with full bio and roles hash" do
+    describe "with full bio and roles hash" do
+      
       def example_data
         full_legislator_attributes
       end
+      
+		  before do
+  	    @parsed_data = JSON.parse(example_data)['results'].first
+    	  @legislator  = Legislator.new(parsed_data)	    
+    	end
 
-      it "assigns attributes as expected" do  
-        legislator.id.should == "B000444"
-        legislator.name.should == "Joseph Biden"
+      it "assigns attributes as expected" do
+        legislator.id.should == "L000304"
+        legislator.name.should == "Joseph I. Lieberman"
         legislator.gender.should == "M"
-        legislator.govtrack_id.should == 300008
-        legislator.url.should == "http://biden.senate.gov"
-        legislator.date_of_birth.should == Date.parse("1942-11-20")
-        legislator.district.should be_nil
+        legislator.govtrack_id.should == 300067
+        legislator.url.should == "http://lieberman.senate.gov/"
+        legislator.date_of_birth.should == Date.parse("1942-02-24")
       end
     
       it "assigns a number of Roles to the Legislator" do
@@ -90,53 +95,51 @@ describe Legislator do
   end
   
   describe "#roles" do
+    def example_data
+      limited_legislator_attributes
+		end
     
     before do
-	    @parsed_data  = JSON.parse(example_data)
-  	  @legislator   = Legislator.new(parsed_data)
-  	  FakeWeb.clean_registry 
+	    @parsed_data = JSON.parse(example_data)
+  	  @legislator  = Legislator.new(parsed_data)
   	end
   	
-    context "when  bio and roles haven't been populated"
-      def example_data
-        limited_legislator_attributes
-  		end
+    context "when bio and roles haven't been populated" do
   		
   		before do
-  		  legislator.instance_variable_get("@roles").should be_nil
-  		  legislator.instance_variable_get("@url").should be_nil
-  		  legislator.instance_variable_get("@birthdate").should be_nil
-  		  
-  		  FakeWeb.register_uri(api_url_for('members/B000444.json'), :string => full_legislator_attributes)
+  		  legislator.attributes[:roles].should be_nil
+  		  legislator.attributes[:url].should be_nil
+  		  legislator.attributes[:birthdate].should be_nil
+  		  FakeWeb.clean_registry
+  		  FakeWeb.register_uri(api_url_for('members/L000304.json'), :string => member_response)
   		end
   		
-      it "makes an API request for bio and roles fields" do
+      it "makes second API request when one attempts to read those attributes" do        
         legislator.roles
-        roles = legislator.instance_variable_get("@roles").should_not be_nil
-  		  
-  		  legislator.url.should == Date.parse("1942-11-20")
-        legislator.date_of_birth.should == Date.parse("http://biden.senate.gov")
+        roles = legislator.attributes[:roles].should_not be_nil
+  		  legislator.date_of_birth.should == Date.parse("1942-02-24")
+        legislator.url.should =="http://lieberman.senate.gov/"
       end
       
     end
     
     context "when bio and roles have already been loaded" do
-      def example_data
+    	def example_data
         full_legislator_attributes
   		end
   		
-  		before do
-  		  legislator.instance_variable_get("@roles").should_not be_nil
-  		  legislator.birthdate.should_not be_nil
-  		end
-      
-      it "does not make another API request" do
-        legislator.roles
-  		  legislator.instance_variable_get("@roles").should_not be_nil
-  		  legislator.instance_variable_get("@url").should be_nil
-  		  legislator.instance_variable_get("@birthdate").should be_nil  		  
+    	before do
+  	    @parsed_data = JSON.parse(example_data)['results'].first
+    	  @legislator  = Legislator.new(parsed_data)
+    	end
+  		
+      it "does not make another API request when accessing attributes" do
+        legislator.roles.should_not be_nil
+  		  legislator.url.should_not be_nil
+  		  legislator.date_of_birth.should_not be_nil
       end
     end
     
   end
-	
+
+end

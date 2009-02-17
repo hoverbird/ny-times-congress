@@ -5,14 +5,17 @@ module NYTimes
 			ATTRIBUTE_MAP = { :date_for    =>  [:date_of_birth],
                         :roles_for   =>  [:roles],
                 			  :integer_for =>  [:govtrack_id, :district],
-                			  :string_for  =>  [:url, :state, :gender, :name, :party] }
+                			  :string_for  =>  [:url, :state, :gender, :name, :party,
+                			                    :missed_votes_pct, :votes_with_party_pct] }
                 			  
       ATTRIBUTES = ATTRIBUTE_MAP.values.flatten
       ATTRIBUTES.each {|attribute| define_lazy_reader_for_attribute_named attribute }
       
       def self.find(id)
-        response = invoke("members/#{id}.json")['results']        
-				new(response.first)
+        response = invoke("members/#{id}.json")
+        require 'ruby-debug'
+        debugger if response.inspect unless response.has_key?('results')
+				new(response['results'].first)
       end
 		  attr_reader :attributes, :id
 		  
@@ -46,7 +49,7 @@ module NYTimes
 			  end
 			  
 	  		def load_fully
-	  		  full_legislator = self.class.find(id)
+	  		  full_legislator = Legislator.find(id)
 	  		  attributes.merge!(full_legislator.attributes)
 	  		  @fully_loaded = true
   			end
