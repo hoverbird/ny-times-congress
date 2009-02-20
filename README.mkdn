@@ -18,20 +18,20 @@ You get a Congress object either by calling Congress.new with the session and ch
     2007_senate    = Congress.new(109, 'senate')
     2008_house     = Congress.new(110, 'house')
 
-Through a Congress object, you can get a list of its representatives as a hash, keyed by congressional Bio ID.
+Through a Congress object, you can get a list of Legislators as a hash, keyed by congressional Bio ID.
 
-    senators = Congress.new(111, 'senate').members
+    senators = Senate.members
 
 Legislator
 ---------------------
+You could crawl the Hash values to find the bio ID in question, as this is a useful key to use across other open government APIs (notably Sunlight)
 
-    $ senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
+    $ hrc = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
+    $ bio_id = hrc.bio_id
 
-  or
+Legislators come down the wire with a lot of interesting info, such as how often they vote along party lines, what roles they serve in Congress and more.  Check out the full set of attributes in the Legislator class.  
 
-    $ senators['C001041']
-
-You can also grav a Legislator directly by their Bio ID. This call includes full details on the congressperson's roles, biographical info and more:
+You can also grab a Legislator directly by their Bio ID. This call includes full details on the congressperson's roles, biographical info and more:
 
     $ Legislator.find('C001041')
     
@@ -41,18 +41,23 @@ When accessing a Legislator from a collection of congress members, they include 
 Roll Call Votes
 ---------------------
 
-To find a vote in any congress, you need to know the session (usually 1 or 2, although rarely congress will go into a 3rd session) and then the ID of the vote:
+To find a Vote in any congress, you need to know the session (usually 1 or 2, although rarely congress will go into a 3rd session) and then the ID of the vote.  Recent votes can be found easily through [Thomas](http://thomas.loc.gov/home/rollcallvotes.html). Curious about the details of the "American Recovery and Reinvestment Act"?  That's vote number 61:
 
-    $ Senate.roll_call_vote(session_number, vote_number)
+    $ vote = Senate.roll_call_vote(1, 61)
     
-You can also find recent votes for any given senator:
+This returns a Vote object which also has an array of Positions, showing which legislators voted for and against this bill.  Thus it would be simple to collect everyone who voted for and against this bill:
+
+    $ vote.positions.find_all {|position| position.for?}
+    $ vote.positions.find_all {|position| position.against?}
+
+You can also find recent votes by any given senator:
     
     $ hillary = Legislator.find('C001041')
     $ hillary.votes
 
 
 Setup
-_____________________
+---------------------
 
 Add Github to your rubygems sources (if you haven't already) and then install the gem:
     $ gem sources -a http://gems.github.com 
@@ -62,9 +67,13 @@ You'll also need to [get an API key]:http://developer.nytimes.com/apps/register 
 
     export NYTIMES_CONGRESS_API_KEY="123456789ETC"
     
-Within your app, you can also set this directly like so:
-
-    NYTimes::Congress::Base.api_key = "123456789ETC"
+Then, just call 'congresh' at the command line, which will open up the Congresh shell.
+    
+Within an app, you can use the library like so:
+    
+    require 'ny-times-congress'
+    include NYTimes::Congress
+    Base.api_key = '123456789ETC'
     
 
 Acknowledgements
