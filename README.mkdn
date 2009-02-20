@@ -24,7 +24,7 @@ Through a Congress object, you can get a list of Legislators as a hash, keyed by
 
 Legislator
 ---------------------
-You could crawl the Hash values to find the bio ID in question, as this is a useful key to use across other open government APIs (notably Sunlight)
+You could crawl the Hash values to find the bio ID in question, as this is a useful key to use across other open government APIs (notably Sunlight).
 
     $ hrc = senators.values.find {|legislator| legislator.name == "Hillary Clinton"}
     $ bio_id = hrc.bio_id
