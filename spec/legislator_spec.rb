@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe Legislator do
-  attr_reader :legislator, :role, :parsed_data
-  
+describe Legislator do  
   describe ".find" do
 	  attr_reader :joe
 	  
@@ -28,13 +26,15 @@ describe Legislator do
 	
 	describe "#initialize" do
 	  context "with limited params hash" do
+	    attr_reader :legislator, :role, :parsed_data
+      
   	  def example_data
         limited_legislator_attributes
   		end
   		
 		  before do
-  	    @parsed_data  = JSON.parse(example_data)
-    	  @legislator   = Legislator.new(parsed_data)	    
+  	    @parsed_data = JSON.parse(example_data)
+    	  @legislator  = Legislator.new(parsed_data)	    
     	end
     	
   		it "assigns attributes as expected" do
@@ -63,7 +63,8 @@ describe Legislator do
     	end
 	  end
 		
-    describe "with full bio and roles hash" do
+    context "with full bio and roles hash" do
+      attr_reader :legislator, :role, :parsed_data
       
       def example_data
         full_legislator_attributes
@@ -87,26 +88,51 @@ describe Legislator do
         legislator.roles.size.should == 2
         legislator.roles.each {|role| role.should be_kind_of(Role)}      
       end
+      
+      it "raises an error if it's unable to assign an id" do
+        data = @parsed_data.dup.delete('member_id')
+        lambda {Legislator.new(dat)}.should raise_error
+      end
+      
   	end
   end
 	
   describe "#positions" do
-    it "needs specs"
-  end
-  
-  describe "#roles" do
+    attr_reader :legislator, :legislator_id, :role, :positions, :parsed_data
+    
     def example_data
-      limited_legislator_attributes
-		end
+      full_legislator_attributes
+    end
     
     before do
-	    @parsed_data = JSON.parse(example_data)
-  	  @legislator  = Legislator.new(parsed_data)
+      @legislator_id = 'L000304'
+      FakeWeb.clean_registry
+	    FakeWeb.register_uri(api_url_for("members/#{legislator_id}/votes.json"), :string => member_positions_response)
+    	FakeWeb.register_uri(api_url_for("members/#{legislator_id}.json"), :string => member_response)
+  	  @legislator   = Legislator.find(legislator_id)
   	end
   	
+    it "returns an Array of Positions for the given Legislator" do
+      legislator.positions.should_not be_nil
+      legislator.positions.size.should == 3
+    end
+    
+  end
+  
+  
+  describe "#roles" do
+
     context "when bio and roles haven't been populated" do
-  		
+  		attr_reader :legislator, :role, :parsed_data
+      def example_data
+        limited_legislator_attributes
+  		end
+      
   		before do
+  		  @parsed_data = JSON.parse(example_data)
+  	    @parsed_data['id'].should_not be_nil
+    	  @legislator  = Legislator.new(parsed_data)
+    	  
   		  legislator.attributes[:roles].should be_nil
   		  legislator.attributes[:url].should be_nil
   		  legislator.attributes[:birthdate].should be_nil
@@ -124,6 +150,8 @@ describe Legislator do
     end
     
     context "when bio and roles have already been loaded" do
+      attr_reader :legislator, :role, :parsed_data
+  		
     	def example_data
         full_legislator_attributes
   		end
@@ -139,7 +167,6 @@ describe Legislator do
   		  legislator.date_of_birth.should_not be_nil
       end
     end
-    
   end
 
 end

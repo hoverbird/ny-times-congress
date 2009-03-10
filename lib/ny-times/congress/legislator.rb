@@ -13,36 +13,33 @@ module NYTimes
       
       def self.find(id)
         response = invoke("members/#{id}.json")
-        require 'ruby-debug'
-        debugger if response.inspect unless response.has_key?('results')
 				new(response['results'].first)
       end
 		  attr_reader :attributes, :id
-		  
-			def initialize(args={})
-        @attributes = {}
-  			@id = args.delete('id') || args.delete('member_id')
-  			transformed = transform(args, ATTRIBUTE_MAP)
-				transformed.each_pair do |attribute_name, attribute_value|
-				  attributes[attribute_name.to_sym] = attribute_value
+      
+      def positions
+        @positions ||= fetch_positions
+      end
+      alias votes positions
+      
+  		def initialize(args={})
+  		  prepare_arguments(args)
+  		  @attributes = {}
+				@transformed_arguments.each_pair do |name, value|
+				  attributes[name.to_sym] = value
 				end
 				@fully_loaded = false
 			end
-      
-      def positions
-        response = Base.invoke("members/#{id}/votes.json")
-        response = response['results'].first['votes']
-        positions_for(response)
-      end
-      
-      def votes
-        response = Base.invoke("members/#{id}/votes.json")
-        response = response['results'].first['votes']
-        votes_for(response)
-      end
-  		
+    			
 			private
 			  attr_reader :fully_loaded
+			  
+			  def prepare_arguments(hash)
+			    args = hash.dup
+    			@id = args.delete('member_id') || args.delete('id')
+    			raise ArgumentError, "could not assign ID" unless @id.is_a?(String)
+    			@transformed_arguments = transform(args, ATTRIBUTE_MAP)
+    	  end
 			  
 			  def fully_loaded?
 			    fully_loaded
@@ -53,7 +50,12 @@ module NYTimes
 	  		  attributes.merge!(full_legislator.attributes)
 	  		  @fully_loaded = true
   			end
-
+        
+        def fetch_positions
+          response = Base.invoke("members/#{id}/votes.json")
+          response = response['results'].first['votes']
+          positions_for(response)
+        end
     end
   end
 end

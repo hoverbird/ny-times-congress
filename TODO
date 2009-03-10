@@ -1,2 +1,3 @@
 * Auto-fill current session number based on the year.
 * Select congress members by state.
+* A Position should fetch the RollCallVote on which it is based
