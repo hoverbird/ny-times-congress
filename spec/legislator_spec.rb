@@ -119,7 +119,6 @@ describe Legislator do
     
   end
   
-  
   describe "#roles" do
 
     context "when bio and roles haven't been populated" do
@@ -165,6 +164,24 @@ describe Legislator do
         legislator.roles.should_not be_nil
   		  legislator.url.should_not be_nil
   		  legislator.date_of_birth.should_not be_nil
+      end
+    end
+  end
+
+  describe "#compare" do
+    context "when bio and roles haven't been populated" do
+  		attr_reader :first, :second, :comparison
+      def example_data; member_vote_comparison_response; end
+ 
+  	  before do
+      	FakeWeb.register_uri(api_url_for('members/L000304/compare/S001141/111/2.json'), :string => example_data)  	    
+        @first = Legislator.new(JSON.parse(member_response)['results'].first)
+        @comparison = first.compare('S001141')
+      end
+      
+      it "calls the URL" do
+        @comparison.should_not be_nil
+        @comparison.should be_kind_of(LegislatorVoteComparison)
       end
     end
   end

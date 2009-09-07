@@ -46,6 +46,5 @@ describe Congress do
     it "should return all members" do
       members.size.should == 102
     end
-    
   end  
 end

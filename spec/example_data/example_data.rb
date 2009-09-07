@@ -10,6 +10,10 @@ def roll_call_votes_response
   File.read(File.dirname(__FILE__) + '/roll_call_votes.json')
 end
 
+def member_vote_comparison_response
+  File.read(File.dirname(__FILE__) + '/member_vote_comparison.json')
+end
+
 def limited_legislator_attributes
   <<-JSON
    {

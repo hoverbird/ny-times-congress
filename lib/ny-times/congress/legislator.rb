@@ -22,6 +22,13 @@ module NYTimes
       end
       alias votes positions
       
+      def compare(legislator_or_id)
+        other_id = legislator_or_id.kind_of?(Legislator) ? legislator_or_id.id : legislator_or_id.to_s
+        response = Base.invoke("members/#{id}/compare/#{other_id}/111/2.json")
+        response = response['results'].first      
+        LegislatorVoteComparison.new(response)
+      end
+      
   		def initialize(args={})
   		  prepare_arguments(args)
   		  @attributes = {}

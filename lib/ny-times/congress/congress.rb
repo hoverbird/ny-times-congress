@@ -2,6 +2,8 @@ module NYTimes
 	module Congress
 		class Congress < Base
 		  attr_reader :number, :chamber
+		  alias session number
+		  
 		  include AttributeTransformation
       
       def initialize(number, chamber)
