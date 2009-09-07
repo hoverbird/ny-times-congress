@@ -65,8 +65,8 @@ describe Congress do
     def example_data; member_vote_comparison_response; end
 
 	  before do
-    	FakeWeb.register_uri(api_url_for('members/L000304/compare/S001141/111/2.json'), :string => example_data)  	    
-      @congress = Congress.new(111, :senate, 2)
+    	FakeWeb.register_uri(api_url_for('members/L000304/compare/S001141/111/senate.json'), :string => example_data)  	    
+      @congress = Congress.new(111, :senate)
       @legislator = Legislator.new(JSON.parse(member_response)['results'].first)
     end
     

@@ -26,10 +26,10 @@ module NYTimes
       end
       
       def compare(legislator_1, legislator_2)
-        raise "A Congress with a specified session number (usually 1 or 2) is needed." unless session        
-        response = Base.invoke("members/#{legislator_1}/compare/#{legislator_2}/#{number}/#{session}.json")
-        response = response['results'].first      
-        LegislatorVoteComparison.new(response)
+        response = Base.invoke("members/#{legislator_1}/compare/#{legislator_2}/#{number}/#{chamber}.json")
+        if response 
+          LegislatorVoteComparison.new(response['results'].first)
+        end
       end
       
       protected
