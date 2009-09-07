@@ -1,13 +1,12 @@
 module NYTimes
 	module Congress
 		class Congress < Base
-		  attr_reader :number, :chamber
-		  alias session number
+		  attr_reader :number, :session, :chamber
 		  
 		  include AttributeTransformation
       
-      def initialize(number, chamber)
-        @number = integer_for(number)
+      def initialize(number, chamber, session = nil)
+        @number, @session = integer_for(number), integer_for(session)
         @chamber = symbol_for(chamber)
         raise AttributeError unless number && chamber
       end
@@ -24,6 +23,13 @@ module NYTimes
       
       def to_s
         "#{number} #{chamber.upcase}"
+      end
+      
+      def compare(legislator_1, legislator_2)
+        raise "A Congress with a specified session number (usually 1 or 2) is needed." unless session        
+        response = Base.invoke("members/#{legislator_1}/compare/#{legislator_2}/#{number}/#{session}.json")
+        response = response['results'].first      
+        LegislatorVoteComparison.new(response)
       end
       
       protected

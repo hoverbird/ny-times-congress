@@ -2,42 +2,38 @@ module NYTimes
 	module Congress
 		class Legislator < Base
       include AttributeTransformation
-			ATTRIBUTE_MAP = { :date_for    =>  [:date_of_birth],
-                        :roles_for   =>  [:roles],
-                			  :integer_for =>  [:govtrack_id, :district],
-                			  :string_for  =>  [:url, :state, :gender, :name, :party,
-                			                    :missed_votes_pct, :votes_with_party_pct] }
-                			  
+      attr_reader :attributes, :id
+		  
+			ATTRIBUTE_MAP = { 
+			  :date_for    =>  [:date_of_birth],
+        :roles_for   =>  [:roles],
+			  :integer_for =>  [:govtrack_id, :district],
+			  :string_for  =>  [:url, :state, :gender, :name, :party, :missed_votes_pct, :votes_with_party_pct] 
+			}           			  
       ATTRIBUTES = ATTRIBUTE_MAP.values.flatten
-      ATTRIBUTES.each {|attribute| define_lazy_reader_for_attribute_named attribute }
+      ATTRIBUTES.each {|attribute| define_lazy_reader_for_attribute_named(attribute) }
       
       def self.find(id)
         response = invoke("members/#{id}.json")
 				new(response['results'].first)
       end
-		  attr_reader :attributes, :id
+      
+  		def initialize(args={})
+  		  prepare_arguments(args)
+  		  @attributes = {}
+				@transformed_arguments.each_pair {|name, value| attributes[name.to_sym] = value }
+				@fully_loaded = false
+			end
+      
+      def to_s
+    	  id
+    	end
       
       def positions
         @positions ||= fetch_positions
       end
       alias votes positions
-      
-      def compare(legislator_or_id)
-        other_id = legislator_or_id.kind_of?(Legislator) ? legislator_or_id.id : legislator_or_id.to_s
-        response = Base.invoke("members/#{id}/compare/#{other_id}/111/2.json")
-        response = response['results'].first      
-        LegislatorVoteComparison.new(response)
-      end
-      
-  		def initialize(args={})
-  		  prepare_arguments(args)
-  		  @attributes = {}
-				@transformed_arguments.each_pair do |name, value|
-				  attributes[name.to_sym] = value
-				end
-				@fully_loaded = false
-			end
-    			
+
 			private
 			  attr_reader :fully_loaded
 			  
@@ -63,6 +59,7 @@ module NYTimes
           response = response['results'].first['votes']
           positions_for(response)
         end
+      #end of private methods
     end
   end
 end

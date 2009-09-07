@@ -1,3 +1,19 @@
-* Auto-fill current session number based on the year.
-* Select congress members by state.
-* A Position should fetch the RollCallVote on which it is based
+Currently Supported:
+* Roll-Call Votes
+* Members of Congress
+* Member Bio and Roles
+* Member Vote Positions
+* Member Vote Comparison
+
+Not yet supported:
+  Missed Votes and Party Votes
+  Nomination Votes
+  Committees and Committee Members
+  New Members
+  Bills Cosponsored by a Member
+  Member Floor Appearances
+  Recent Bills
+  Bills by Member
+  Bill Details
+  Bill Subjects, Amendments and Related Bills
+  Bill Cosponsors

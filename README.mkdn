@@ -11,14 +11,14 @@ The Congress Shell (congresh for short/cute) is a simple interactive prompt that
 
 Congress.new
 ---------------------
-You get a Congress object either by calling Congress.new with the session and chamber, or by using the Senate and House constants which return the current session of each:
+You get a Congress object either by calling Congress.new with a number and chamber with an optional session number, or by using the Senate and House constants which return the current session of each:
 
-    current_senate = Senate
-    current_house  = House
-    2007_senate    = Congress.new(109, 'senate')
-    2008_house     = Congress.new(110, 'house')
+    current_senate          = Senate
+    current_house           = House
+    2007_senate             = Congress.new(109, 'senate')
+    2009_house_2nd_session  = Congress.new(111, 'house', 2)
 
-Through a Congress object, you can get a list of Legislators as a hash, keyed by congressional Bio ID.
+Through a Congress object, you can get a hash of Legislators, keyed by congressional Bio ID.
 
     senators = Senate.members
 
