@@ -65,7 +65,7 @@ Add Github to your rubygems sources (if you haven't already) and then install th
     
 You'll also need to [get an API key]:http://developer.nytimes.com/apps/register from the [NY Times Developer Network]: http://developer.nytimes.com/.  If you set the key returned to an environment variable as shown below, Congresh will pick it up and include it in all your requests.  You can keep this in your bash profile, but I also recommend putting all your developer keys in a separate .api_keys file in your path
 
-    export NYTIMES_CONGRESS_API_KEY="123456789ETC"
+    export NY_TIMES_CONGRESS_API_KEY="123456789ETC"
     
 Then, just call 'congresh' at the command line, which will open up the Congresh shell.
     
