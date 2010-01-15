@@ -42,6 +42,12 @@ module NYTimes
         roles_array.collect {|e| Role.new(e)}
       end
       
+      def appearances_for(floor_array)
+        floor_array.collect do |floor_hash|
+          Floor.new(floor_hash['date'], floor_hash['title'], floor_hash['url'], floor_hash['start_time'], floor_hash['end_time'])
+        end
+      end
+      
       def votes_for(votes_array)        
         votes_array.collect {|vote_hash| RollCallVote.new(vote_hash['vote'])}
       end
