@@ -3,7 +3,7 @@ NY Times Congress
 
 A Ruby wrapper for the New York Times Congress API.
 ---------------------
-The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public [API](http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/).  [ny-times-congress](http://github.com/hoverbird/ny-times-congress/) aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly.
+The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public [API](http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/).  [nytimes-congress](http://github.com/dwillis/nytimes-congress/) aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly.
 
 Introdushing Congresh
 ---------------------
