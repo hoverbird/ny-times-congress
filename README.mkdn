@@ -91,7 +91,7 @@ All information made available through this software is generously organized and
 
 License
 ---------------------
-Copyright (c) 2009 Patrick Ewing <patrick.henry.ewing@gmail.com>
+Copyright (c) 2010 Patrick Ewing (<patrick.henry.ewing@gmail.com>) and Derek Willis (<dwillis@gmail.com>).
 
 
 Made available under the MIT License (read LICENSE for details).
