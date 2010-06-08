@@ -16,7 +16,7 @@ module NYTimes
       end
       
       def roll_call_vote(session_number, roll_call_number, params = {})
-        results = Base.invoke("#{api_path}/sessions/#{session_number}/votes/#{roll_call_number}.json")['results']['votes']['vote']
+        results = Base.invoke("#{api_path}/sessions/#{session_number}/votes/#{roll_call_number}.json")['results']['votes']
         RollCallVote.new(results)
       end
       

@@ -61,7 +61,11 @@ module NYTimes
           Position.new(vote_hash['member_id'], vote_hash['vote_position'])
         end
       end
-            
+      
+      def vacant_seats_for(seats_array)
+        seats_array.collect {|s| Role.new(s)}
+      end
+      
       def empty?(value)
         value.nil? || value == "N/A" || value == ""
       end
