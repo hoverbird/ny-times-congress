@@ -61,7 +61,7 @@ module NYTimes
           Position.new(vote_hash['member_id'], vote_hash['vote_position'])
         end
       end
-      
+            
       def empty?(value)
         value.nil? || value == "N/A" || value == ""
       end
