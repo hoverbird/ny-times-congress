@@ -5,7 +5,7 @@ module NYTimes
       attr_reader :attributes, :id
 		  
 			ATTRIBUTE_MAP = { 
-			  :date_for    =>  [:date_of_birth],
+			  :date_for    =>  [:date_of_birth, :start_date],
         :roles_for   =>  [:roles],
         :appearances_for => [:appearances],
 			  :integer_for =>  [:govtrack_id, :district, :seniority, :cspan_id],

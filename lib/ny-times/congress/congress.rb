@@ -15,6 +15,10 @@ module NYTimes
         @members ||= fetch_members
       end
       
+      def self.new_members(params = {})
+        Congress.fetch_new_members
+      end
+      
       def roll_call_vote(session_number, roll_call_number, params = {})
         results = Base.invoke("#{api_path}/sessions/#{session_number}/votes/#{roll_call_number}.json")['results']['votes']
         RollCallVote.new(results)
@@ -36,6 +40,14 @@ module NYTimes
       def fetch_members
         results = Base.invoke("#{api_path}/members.json")['results'].first
   			results['members'].inject({}) do |hash, member| 
+  			  hash[member['id']] = Legislator.new(member)
+  			  hash
+  			end
+      end
+      
+      def self.fetch_new_members
+        results = Base.invoke("/members/new.json")['results'].first
+  			results['members'].inject({}) do |hash, member|
   			  hash[member['id']] = Legislator.new(member)
   			  hash
   			end
