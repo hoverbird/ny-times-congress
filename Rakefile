@@ -6,11 +6,11 @@ begin
     s.name = "ny-times-congress"
     s.executables = "congresh" 
     s.summary = "Ruby wrapper and command shell for the New York Times Congress API"
-    s.authors = ["Patrick Ewing"]
+    s.authors = ["Patrick Ewing", "Derek Willis"]
     s.files =  FileList["[A-Z]*", "{bin,lib,spec}/**/*"] 
     s.add_dependency("json", [">= 1.1.3"])
-    s.email = "patrick.henry.ewing@gmail.com"
-    s.homepage = "http://github.com/hoverbird/ny-times-congress"
+    s.email = "dwillis@gmail.com"
+    s.homepage = "http://github.com/dwillis/nytimes-congress"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
