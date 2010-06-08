@@ -3,7 +3,7 @@ module NYTimes
 		class Base
 		  API_NAME    = 'congress'
 		  API_SERVER  = 'api.nytimes.com'
-		  API_VERSION = 2
+		  API_VERSION = 3
 		  API_BASE    = "/svc/politics/v#{API_VERSION}/us/legislative/#{API_NAME}"
 			
 			@@api_key = nil

@@ -4,7 +4,8 @@ module NYTimes
 		  include AttributeTransformation
       
   		ATTRIBUTE_MAP = { :date_for    =>  [:start_date, :end_date],
-                			  :integer_for =>  [:district, :congress],
+                			  :integer_for =>  [:district, :congress, :bills_sponsored, :bills_cosponsored, :seniority],
+                			  :float_for => [:missed_votes_pct, :votes_with_party_pct], 
                 			  :string_for  =>  [:party, :chamber, :title, :state] }
     
       attr_reader *ATTRIBUTE_MAP.values.flatten

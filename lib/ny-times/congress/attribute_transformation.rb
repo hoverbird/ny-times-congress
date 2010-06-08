@@ -25,6 +25,10 @@ module NYTimes
       def string_for(value)
         value.to_s
       end
+      
+      def float_for(value)
+        value.to_f
+      end
   
       def integer_for(string)
         if string.respond_to? :to_i
