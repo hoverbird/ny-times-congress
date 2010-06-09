@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{ny-times-congress}
+  s.name = %q{nytimes-congress}
   s.version = "1.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "lib/ny-times/congress/attribute_transformation.rb",
      "lib/ny-times/congress/base.rb",
      "lib/ny-times/congress/congress.rb",
+     "lib/ny-times/congress/current_member.rb",
      "lib/ny-times/congress/floor.rb",
      "lib/ny-times/congress/legislator.rb",
      "lib/ny-times/congress/legislator_vote_comparison.rb",
