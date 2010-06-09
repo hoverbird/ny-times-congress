@@ -8,8 +8,8 @@ module NYTimes
 			  :date_for    =>  [:date_of_birth, :start_date],
         :roles_for   =>  [:roles],
         :appearances_for => [:appearances],
-			  :integer_for =>  [:govtrack_id, :district, :seniority, :cspan_id],
-			  :string_for  =>  [:url, :state, :gender, :first_name, :middle_name, :last_name, :current_party, :missed_votes_pct, :votes_with_party_pct, :twitter_id, :youtube_id] 
+			  :integer_for =>  [:govtrack_id, :district, :seniority, :cspan_id, :next_election],
+			  :string_for  =>  [:url, :state, :gender, :first_name, :middle_name, :last_name, :name, :current_party, :missed_votes_pct, :votes_with_party_pct, :twitter_id, :youtube_id] 
 			}           			  
       ATTRIBUTES = ATTRIBUTE_MAP.values.flatten
       ATTRIBUTES.each {|attribute| define_lazy_reader_for_attribute_named(attribute) }
@@ -18,7 +18,7 @@ module NYTimes
         response = invoke("members/#{id}.json")
 				new(response['results'].first)
       end
-      
+            
   		def initialize(args={})
   		  prepare_arguments(args)
   		  @attributes = {}

@@ -12,11 +12,21 @@ module NYTimes
       end
       
       def members(params = {})        
-        @members ||= fetch_members
+        @members ||= fetch_members(Base.invoke("#{api_path}/members.json")['results'].first)
       end
       
       def self.new_members(params = {})
         Congress.fetch_new_members
+      end
+      
+      def current_member_for_state_district(state, district=nil)
+        if district
+          api_path = "members/house/#{state}/#{district}/current.json"
+        else
+          api_path = "members/senate/#{state}/current.json"
+        end
+        response = Base.invoke(api_path)['results']
+        fetch_current_members(response)
       end
       
       def roll_call_vote(session_number, roll_call_number, params = {})
@@ -37,14 +47,24 @@ module NYTimes
       
       protected
       
-      def fetch_members
-        results = Base.invoke("#{api_path}/members.json")['results'].first
-  			results['members'].inject({}) do |hash, member| 
+      def fetch_members(results)
+  			results.inject({}) do |hash, member| 
   			  hash[member['id']] = Legislator.new(member)
+  			  hash.delete_if {|k,v| k.nil? }
   			  hash
   			end
       end
-      
+
+      def fetch_current_members(results)
+        if results.length > 1
+    			results.collect do |member| 
+    			  CurrentMember.new(member)
+    			end
+    		else
+    		  CurrentMember.new(results.first)
+    		end
+      end
+
       def self.fetch_new_members
         results = Base.invoke("/members/new.json")['results'].first
   			results['members'].inject({}) do |hash, member|
