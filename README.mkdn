@@ -5,7 +5,7 @@ A Ruby wrapper for the New York Times Congress API.
 ---------------------
 The NY Times has been quietly scraping the web for data related to the United States Congress, and making the data freely available through a public [API](http://open.blogs.nytimes.com/2009/01/08/introducing-the-congress-api/).  [nytimes-congress](http://github.com/dwillis/nytimes-congress/) aims to make it even easier to write Ruby applications using this data, and also provides a command shell for interacting with the API directly.
 
-Introdushing Congresh
+Introducing Congresh
 ---------------------
 The Congress Shell (congresh for short/cute) is a simple interactive prompt that wraps IRB.  It includes your API key (see setup below) and provides a few conveniences for test-driving the API. 
 
@@ -36,7 +36,15 @@ You can also grab a Legislator directly by their Bio ID. This call includes full
     $ Legislator.find('C001041')
     
 When accessing a Legislator from a collection of congress members, they include only a limited set of attributes.  However, the library will make a second API call and lazy-load full attributes if you ask for them specifically.  So even though a Legislator object returned through Congress.members don't have the #gender attribute, if you call for a specific Legislators gender, that data will be fetched and populated just in time.
-    
+
+Current Member
+---------------------
+If you need to check the current representative for a House district or senators from a state, each chamber exposes a method for that. Note that the senate call does not need a district and returns a list of two senators.
+
+    $ pa19 = House.current_member_for_state_district("PA", 19)
+    $ pa19.name
+    "Todd R. Platts"
+
     
 Roll Call Votes
 ---------------------
@@ -49,6 +57,8 @@ This returns a Vote object which also has an array of Positions, showing which l
 
     $ vote.positions.find_all {|position| position.for?}
     $ vote.positions.find_all {|position| position.against?}
+    
+The vote also includes an array of vacant seats, if present.
 
 You can also find recent votes by any given senator:
     
@@ -61,7 +71,7 @@ Setup
 
 Add Github to your rubygems sources (if you haven't already) and then install the gem:
     $ gem sources -a http://gems.github.com 
-    $ sudo gem install hoverbird-ny-times-congress
+    $ sudo gem install nytimes-congress
     
 You'll also need to [get an API key]:http://developer.nytimes.com/apps/register from the [NY Times Developer Network]: http://developer.nytimes.com/.  If you set the key returned to an environment variable as shown below, Congresh will pick it up and include it in all your requests.  You can keep this in your bash profile, but I also recommend putting all your developer keys in a separate .api_keys file in your path
 
