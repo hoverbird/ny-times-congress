@@ -49,6 +49,10 @@ module NYTimes
         members = fetch_members_by_type(Base.invoke("#{number}/#{chamber}/votes/#{type}.json")['results'].first['members'])
       end
       
+      def bills(type)
+        bills = bills_for(Base.invoke("#{number}/#{chamber}/bills/#{type}.json")['results'].first['bills'])
+      end
+      
       protected
       
       def fetch_members(results)
