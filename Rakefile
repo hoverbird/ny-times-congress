@@ -3,7 +3,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "ny-times-congress"
+    s.name = "nytimes-congress"
     s.executables = "congresh" 
     s.summary = "Ruby wrapper and command shell for the New York Times Congress API"
     s.authors = ["Patrick Ewing", "Derek Willis"]
