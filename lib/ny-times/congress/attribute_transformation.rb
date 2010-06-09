@@ -62,6 +62,12 @@ module NYTimes
         end
       end
       
+      def bills_for(bills_array)
+        bills_array.collect do |bill_hash|
+          Bill.new(bill_hash)
+        end
+      end
+      
       def vacant_seats_for(seats_array)
         seats_array.collect {|s| Role.new(s)}
       end

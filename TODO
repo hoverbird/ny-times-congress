@@ -6,15 +6,15 @@ Currently Supported:
 * Member Vote Comparison
 * New Members
 * Current member for state/district
+* Missed Votes, Party Votes, Lone No and Perfect Voting
+* Bills by Member
 
 Not yet supported:
-  Missed Votes and Party Votes
   Nomination Votes
   Committees and Committee Members
   Bills Cosponsored by a Member
   Member Floor Appearances
   Recent Bills
-  Bills by Member
   Bill Details
   Bill Subjects, Amendments and Related Bills
   Bill Cosponsors

@@ -38,6 +38,14 @@ module NYTimes
       def appearances
         @appearances ||= fetch_appearances
       end
+      
+      def bills(type)
+        if type == 'introduced'
+          @bills_introduced ||= fetch_bills(type)
+        elsif type == 'updated'
+          @bills_updated ||= fetch_bills(type)
+        end
+      end
 
 			private
 			  attr_reader :fully_loaded
@@ -69,6 +77,12 @@ module NYTimes
           response = Base.invoke("members/#{id}/floor_appearances.json")
   				response = response['results'].first['appearances']
   				appearances_for(response)
+        end
+        
+        def fetch_bills(type)
+          response = Base.invoke("members/#{id}/bills/#{type}.json")
+          response = response['results'].first['bills']
+          bills_for(response)
         end
         
       #end of private methods

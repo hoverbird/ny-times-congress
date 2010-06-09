@@ -6,6 +6,7 @@ require 'JSON'
 
 require 'congress/base'
 require 'congress/attribute_transformation'
+require 'congress/bill'
 require 'congress/congress'
 require 'congress/current_member'
 require 'congress/legislator'
