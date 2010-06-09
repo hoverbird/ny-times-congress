@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{nytimes-congress}
-  s.version = "1.4.0"
+  s.version = "1.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Ewing", "Derek Willis"]
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
      "lib/ny-times/congress/floor.rb",
      "lib/ny-times/congress/legislator.rb",
      "lib/ny-times/congress/legislator_vote_comparison.rb",
+     "lib/ny-times/congress/member_vote_type.rb",
      "lib/ny-times/congress/nomination.rb",
      "lib/ny-times/congress/position.rb",
      "lib/ny-times/congress/role.rb",
