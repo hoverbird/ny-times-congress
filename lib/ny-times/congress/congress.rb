@@ -12,7 +12,7 @@ module NYTimes
       end
       
       def members(params = {})        
-        @members ||= fetch_members(Base.invoke("#{api_path}/members.json")['results'].first)
+        @members ||= fetch_members(Base.invoke("#{api_path}/members.json")['results'].first['members'])
       end
       
       def self.new_members(params = {})
@@ -45,24 +45,32 @@ module NYTimes
         end
       end
       
+      def votes(type)
+        members = fetch_members_by_type(Base.invoke("#{number}/#{chamber}/votes/#{type}.json")['results'].first['members'])
+      end
+      
       protected
       
       def fetch_members(results)
   			results.inject({}) do |hash, member| 
   			  hash[member['id']] = Legislator.new(member)
-  			  hash.delete_if {|k,v| k.nil? }
   			  hash
   			end
       end
 
       def fetch_current_members(results)
-        if results.length > 1
-    			results.collect do |member| 
-    			  CurrentMember.new(member)
-    			end
-    		else
-    		  CurrentMember.new(results.first)
+    		results.inject({}) do |hash, member|
+    			hash[member['id']] = CurrentMember.new(member)
+    			hash
     		end
+      end
+      
+      def fetch_members_by_type(results)
+        h = Hash.new
+  			results.each do |member|
+  			  h[member['id']] = MemberVoteType.new(member)
+  			  h
+  			end
       end
 
       def self.fetch_new_members
