@@ -5,6 +5,7 @@
       "votes": {
         "vote": {
            "congress": "111",
+           "chamber": "house",
            "session": "1",
            "roll_call": "12",
            "bill_number": "S.181",

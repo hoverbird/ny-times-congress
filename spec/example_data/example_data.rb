@@ -22,7 +22,7 @@ def limited_legislator_attributes
     "first_name": "Joseph I.",
     "middle_name": "I.",
     "last_name": "Lieberman",
-    "party": "ID",
+    "current_party": "ID",
     "state": "CT",
                      "missed_votes_pct": "0.00",
     "votes_with_party_pct": "93.44" 

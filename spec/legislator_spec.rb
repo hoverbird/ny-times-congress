@@ -40,7 +40,7 @@ describe Legislator do
   		it "assigns attributes as expected" do
   		  legislator.id.should == "L000304"
         legislator.name.should == "Joseph I. Lieberman"
-        legislator.party.should == "ID"
+        legislator.current_party.should == "ID"
         legislator.state.should == "CT"
   		end
   		
